@@ -1,5 +1,5 @@
 # Ajax Chat
-Ajax Chat for phpbb 3.1
+Ajax Chat for phpBB 3.3
 
 [![Build Status](https://travis-ci.org/LMOspaceace/ajaxchat.svg?branch=master)](https://travis-ci.org/LMOspaceace/ajaxchat)
 
@@ -9,7 +9,7 @@ This extension adds a chat to your forum's main page as well as a popup and chat
 
 ## Install
 
-1. Download the latest release from (https://github.com/LMOspaceace/ajaxchat/releases).
+1. Download the latest release from (https://github.com/DavidIQ/ajaxchat/releases).
 2. Unzip the downloaded release, and change the name of the folder to `ajaxchat`.
 3. In the `ext` directory of your phpBB board, create a new directory named `spaceace` (if it does not already exist).
 4. Copy the `ajaxchat` folder to `/ext/spaceace/` (if done correctly, you'll have the main extension class at (your forum root)/ext/spaceace/ajaxchat/composer.json).
