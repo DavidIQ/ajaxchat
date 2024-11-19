@@ -1,0 +1,14 @@
+{% if not S_AJAX_CHAT_VIEW and S_AJAX_CHAT_ONLINELIST %}
+		</p>
+	</div>
+	<div class="stat-block ajax_chat">
+		<h3><a href="{U_CHAT}" title="{L_CHAT_EXPLAIN}">{L_CHAT_WHO_IS_ONLINE}</a></h3>
+		<p>
+		{% if loops.whoisrow %}
+			{% for whoisrow in loops.whoisrow %}
+				{{ whoisrow.USERNAME_FULL }}{% if not whoisrow.S_LAST_ROW %}, {% endif %}
+			{% endfor %}
+		{% else %}
+			{{ lang('CHAT_NO_ONLINE_USERS') }}
+		{% endif %}
+{% endif %}

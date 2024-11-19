@@ -48,6 +48,8 @@ var interval = setInterval('handle_send("read", last_id);', read_interval);
 var name = getCookie(cookie_name);
 var blkopen = '';
 var blkclose = '';
+var loggingout = false;
+var isArchive = window.location.href.indexOf('/archive') >= 0;
 
 if (chatbbcodetrue && name !== null && name !== 'null') {
 
@@ -66,6 +68,7 @@ function handle_send(mode, f)
 		param += '&last_time=' + last_time;
 		param += '&last_post=' + post_time;
 		param += '&read_interval=' + read_interval;
+		param += '&is_archive=' + (isArchive ? '1' : '0');
 
 		if (mode === 'add' && document.postform.message.value !== '')
 		{
@@ -119,7 +122,7 @@ function handle_return()
 					$text = document.getElementById('message').value;
 					document.getElementById('message').value = $text + results[0];
 					document.getElementById("message").focus();
-					$('#chat').find('.username, .username-coloured').attr('title', chat_username_title);
+					if (!isArchive) $('#chat').find('.username, .username-coloured').attr('title', chat_username_title);
 				}
 			} else if (type === 'edit') {
 				jQuery(function($) {
@@ -134,7 +137,7 @@ function handle_return()
 					var popup = window.self;
 					popup.opener = window.self;
 					popup.close();
-					$('#chat').find('.username, .username-coloured').attr('title', chat_username_title);
+					if (!isArchive) $('#chat').find('.username, .username-coloured').attr('title', chat_username_title);
 				});
 			} else if (type !== 'delete') {
 				if (results[1])
@@ -160,7 +163,7 @@ function handle_return()
 						}
 
 					}
-					$('#chat').find('.username, .username-coloured').attr('title', chat_username_title);
+					if (!isArchive) $('#chat').find('.username, .username-coloured').attr('title', chat_username_title);
 				}
 			} else if (type == 'delete') {
 				var parent = document.getElementById('chat');
@@ -175,6 +178,10 @@ function handle_return()
 				}, 200);
 			}
 			indicator_switch('off');
+			if (loggingout)
+			{
+				window.location = root_path;
+			}
 		} else {
 			if (type == 'receive') {
 				window.clearInterval(interval);
@@ -263,6 +270,17 @@ function http_object()
 	}
 }
 
+function chatLogout()
+{
+	if (confirm('Are you sure you want to exit the chat room?'))
+	{
+		window.clearInterval(interval);
+		loggingout = true;
+		handle_send("logout");
+	}
+	return false;
+}
+
 //START:Whatever
 function addText(instext)
 {
@@ -309,7 +327,7 @@ jQuery(function($) {
 
 	'use strict';
 
-	$(window).load(function () {
+	$(window).on('load', function () {
 		$("#smilies").click(function () {
 			$("#chat_smilies").toggle(600);
 		});
@@ -326,6 +344,21 @@ jQuery(function($) {
 				if($chatscroll.filter(function(){ return $(this).is(':hover'); }).length){$chatscroll.stop();}else {$chatscroll.scrollTop($('#chat').height());}
 			}, 200);
 		}
+		$(window).on('beforeunload', function() {
+			if (!loggingout && !isArchive)
+			{
+				handle_send("logout");
+			}
+		});
+
+		$('#chatLogout').on('mouseup', function () {
+			   $(window).on('beforeunload', function(){
+					if (!loggingout && !isArchive)
+					{
+						handle_send("logout");
+					}
+			   });
+		});
 	});
 
 	var $chat_edit = $('#chat_edit');
@@ -334,18 +367,23 @@ jQuery(function($) {
 		handle_send('edit', $chat_edit.find('input[name=chat_id]').val());
 	});
 
-	$('#chat').find('.username, .username-coloured').attr('title', chat_username_title);
+	if (!isArchive)
+	{
+		$('#chat').find('.username, .username-coloured').attr('title', chat_username_title);
 
-	$('#chat').on('click', '.username, .username-coloured', function(e) {
-		e.preventDefault();
+		$('#chat').on('click', '.username, .username-coloured, .username-greet', function(e) {
+			e.preventDefault();
 
-		var username = $(this).text(),
-			user_colour = ($(this).hasClass('username-coloured')) ? parseColor($(this).css('color')).hex : false;
+			var username = $(this).text(),
+				user_colour = (!!$(this).css('color')) ? parseColor($(this).css('color')).hex : false;
 
-		if (user_colour) {
-			insert_text('[color=' + user_colour + '][b]@' + username + '[/b][/color], ');
-		} else {
-			insert_text('[b]@' + username + '[/b], ');
-		}
-	});
+			if (username.indexOf('@') < 0) username = '@' + username;
+
+			if (user_colour) {
+				insert_text('[color=' + user_colour + '][b]' + username + '[/b][/color], ');
+			} else {
+				insert_text('[b]' + username + '[/b], ');
+			}
+		});
+	}
 });

@@ -13,6 +13,7 @@
 		var chat_error_post = '{{ lang('NO_POST_IN_CHAT')|e('js') }}';
 		var chat_error_view = '{{ lang('NO_VIEW_PERMISSION')|e('js') }}';
 		var chat_username_title = '{{ lang('RESPOND')|e('js') }}';
+		var root_path = '{{ ROOT_PATH }}';
 		{% if S_POPUP %}
 			var query_url = '{{ FILENAME }}/popup';
 		{% elseif S_ARCHIVE %}

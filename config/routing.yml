@@ -7,7 +7,12 @@ spaceace_ajaxchat_archive:
     path: /chat/archive{tslash}
     defaults: {_controller: spaceace.ajaxchat.chat.controller:defaultAction, page: archive}
     requirements: { tslash : "/?" }
-    
+
+spaceace_ajaxchat_logout:
+    path: /chat/logout{tslash}
+    defaults: {_controller: spaceace.ajaxchat.chat.controller:logoutAction}
+    requirements: { tslash : "/?" }
+
 spaceace_ajaxchat_edit:
     path: /chat/edit/{chat_id}{tslash}
     defaults: {_controller: spaceace.ajaxchat.chat.controller:editAction}

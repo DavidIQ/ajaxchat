@@ -23,7 +23,9 @@
 									{% EVENT spaceace_ajax_chat_smilies_after %}
 								{% endif %}
 								{% EVENT spaceace_ajax_chat_buttons_mid %}
+								{% if U_ACP %}
 								<input type="button" class="button" onclick="popup('{{ FILENAME }}/archive', 1000, 565); return false;" value="{{ lang('CHAT_ARCHIVE') }}" title="{{ lang('CHAT_ARCHIVE_EXPLAIN') }}" />
+								{% endif %}
 								{% if CHAT_PAGE != 'popup' %}
 									<input type="button" class="button" onclick="popup('{{ FILENAME }}/popup', 1000, 665); return false;" value="{{ lang('CHAT_POPUP') }}" title="{{ lang('CHAT_POPUP_EXPLAIN') }}" />
 								{% endif %}

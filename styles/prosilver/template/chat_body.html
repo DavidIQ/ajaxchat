@@ -19,7 +19,10 @@
 						<ul class="topiclist">
 							<li class="header">
 								<dl class="row-item">
-									<dt><div class="chat-header-link">{% if SCRIPT_NAME == 'index' %}<a href="{{ U_CHAT }}">{{ lang('CHAT_EXPLAIN') }}</a>{% else %}{{ lang('CHAT_EXPLAIN') }}{% endif %}</div></dt>
+									<dt>
+										<div class="chat-header-link" style="float: left;">{% if SCRIPT_NAME == 'index' %}<a href="{{ U_CHAT }}">{{ lang('CHAT_EXPLAIN') }}</a>{% else %}{{ lang('CHAT_EXPLAIN') }}{% endif %}</div>
+										<div style="float: right;"><a id="chatLogout" title="Logout from chat" onclick="return chatLogout();" href="#">{{ lang('LOGOUT') }}</a></div>
+									</dt>
 									<dd></dd>
 								</dl>
 							</li>
@@ -58,7 +61,7 @@
 						{% endif %}
 					{% endif %}
 					<div class="chatform">
-						<span class="list chat-icon details">{{ lang('DETAILS') }}</span>
+						<span class="list chat-icon details">{{ lang('DETAILS') }}&nbsp;</span>
 						<img src="{{ BOARD_URL }}ext/spaceace/ajaxchat/styles/all/theme/images/check_indicator.gif" id="check_indicator" alt="check_indicator" title="{{ lang('AJAX_CHAT_VERSION') }}" />
 						<img src="{{ BOARD_URL }}ext/spaceace/ajaxchat/styles/all/theme/images/act_indicator.gif" id="act_indicator" alt="act_indicator" title="{{ lang('AJAX_CHAT_VERSION') }}" />
 						<strong>&nbsp;{{ lang('UPDATES') }}&nbsp;<span id="update_seconds">{{ REFRESH_TIME }}</span>&nbsp;{{ lang('UNIT') }}</strong>

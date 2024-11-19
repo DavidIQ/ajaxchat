@@ -121,8 +121,8 @@ class listener implements EventSubscriberInterface
 			'core.page_header'							=> 'page_header',
 			'core.permissions'							=> 'add_permission',
 			'core.index_modify_page_title'				=> 'index',
-			'core.viewforum_get_topic_data'				=> 'index',
-			'core.viewtopic_before_f_read_check'		=> 'index',
+			'core.viewforum_get_topic_data'				=> 'viewforum',
+			'core.viewtopic_before_f_read_check'		=> 'viewtopic',
 			'core.posting_modify_submit_post_after'		=> 'add_forum_id',
 			'core.acp_users_prefs_modify_data'			=> 'acp_users_chat_settings_get', // For the ACP user setting
 			'core.acp_users_prefs_modify_template_data'	=> 'acp_profile_ajax_chat_template', // For the ACP user setting
@@ -245,6 +245,28 @@ class listener implements EventSubscriberInterface
 		$this->user->add_lang('posting');
 
 		$this->chat->defaultAction('index');
+	}
+	
+	/**
+	 * Processes viewtopic chat actions
+	 */
+	public function viewtopic()
+	{
+		if ($this->config['ajax_chat_forum_posts'])
+		{
+			$this->index();
+		}
+	}
+	
+	/**
+	 * Processes viewtopic chat actions
+	 */
+	public function viewforum()
+	{
+		if ($this->config['ajax_chat_forum_posts'])
+		{
+			$this->index();
+		}
 	}
 
 	/**

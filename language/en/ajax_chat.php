@@ -74,8 +74,10 @@ $lang = array_merge(
 		'NO_VIEW_PERMISSION'			=> 'You do not have permission to view chat.',
 		'DELETE_CHAT_COOKIE'			=> 'Delete cookie',
 		'DELETE_CHAT_COOKIE_EXPLAIN'	=> 'This button deletes the font colour hold cookie.',
+		'CHAT_WHO_IS_ONLINE'			=> 'Users in chat',
+		'CHAT_NO_ONLINE_USERS'			=> 'No registered users in chat',
 		// @copyright line. No translations below this line.
 		// Removing this from the template files will result in support no longer given.
-		'DETAILS'				=> '<a href="http://www.livemembersonly.com" style="font-weight: bold;">AJAX Chat &copy; 2015</a> <strong style="color: #AA0000;">Live Members Only</strong>',
+		'DETAILS'				=> '<strong>AJAX Chat</strong>',
 	)
 );

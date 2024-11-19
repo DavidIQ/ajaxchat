@@ -1,11 +1,11 @@
 {
     "name": "spaceace/ajaxchat",
     "type": "phpbb-extension",
-    "description": "Chat for phpBB 3.1 and 3.2",
+    "description": "Chat for phpBB",
     "homepage": "https://www.livemembersonly.com",
-    "version": "3.0.26",
-    "time": "2017-09-24",
-    "license": "GPL-2.0",
+    "version": "3.1.00",
+    "time": "2024-11-19",
+    "license": "GPL-2.0-only",
     "authors": [
         {
             "name": "spaceace",
