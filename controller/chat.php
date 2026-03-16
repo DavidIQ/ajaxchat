@@ -924,7 +924,7 @@ class chat
 			$row	 = $this->db->sql_fetchrow($result);
 			$this->db->sql_freeresult($result);
 
-			if ($row['user_id'] != $this->user->data['user_id'])
+			if (is_array($row) && $row['user_id'] != $this->user->data['user_id'])
 			{
 				$start_time = time();
 				$sql_ary = [
